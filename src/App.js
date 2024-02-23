@@ -1,6 +1,7 @@
 import './App.css';
 import ShowGames from './components/mainPage';
 
+
 function App() {
   return (
     <div className="App">

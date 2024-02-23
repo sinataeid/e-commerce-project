@@ -43,6 +43,7 @@ export default function ShowGames() {
     setBasketData((prevBasketData) => [...prevBasketData, newItem]);
   };
 
+
   const showGameDetails = (title) => {
     setSelectedGame(title);
   };
