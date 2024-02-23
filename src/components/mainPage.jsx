@@ -1,5 +1,4 @@
-// Give the component access to its CSS
-import React from "react";
+import React, { useState } from "react";
 import "./mainPage.css";
 import Game, {
   actionGames,
@@ -7,13 +6,42 @@ import Game, {
   shooterGames,
   rpgGames,
 } from "../model/gamesData";
-import { useState } from "react";
 
-// Functional component - must be capitalized
 export default function ShowGames() {
   const [selectedGame, setSelectedGame] = useState(null);
+  const [basketData, setBasketData] = useState([]);
 
-  
+  class Basket extends Game {
+    constructor(title, price, img) {
+      super(
+        title,
+        "Default description",
+        price,
+        "Default platform",
+        "Default developer",
+        img
+      );
+    }
+  }
+
+  const ShowBasket = ({ title, price, img }) => {
+    const [basket, setBasket] = useState(new Basket(title, price, img));
+
+    return (
+      <div>
+        <h2>Basket Details</h2>
+        <p>Title: {basket.title}</p>
+        <p>Price: {basket.price}</p>
+        <img className="img-size" src={basket.img} alt="none" />
+      </div>
+    );
+  };
+
+  const addToBasket = () => {
+    let newItem = new Basket("Test", 20, "img"); // Change these values as needed
+
+    setBasketData((prevBasketData) => [...prevBasketData, newItem]);
+  };
 
   const showGameDetails = (title) => {
     setSelectedGame(title);
@@ -70,11 +98,12 @@ export default function ShowGames() {
     <div>
       <h2>{game.title}</h2>
       <p>{game.description}</p>
-      <button className="back-button" onClick={resetSelectedGame}>Back</button>
+      <button className="back-button" onClick={resetSelectedGame}>
+        Back
+      </button>
     </div>
   );
 
-  // HTML goes in the return.
   return (
     <div>
       {selectedGame ? (
@@ -89,9 +118,19 @@ export default function ShowGames() {
           <AdventureGamesList games={adventureGames} />
           <h2>Role Playing Games</h2>
           <RpgGamesList games={rpgGames} />
-          
         </>
       )}
+
+      {basketData.map((basket, index) => (
+        <ShowBasket
+          key={index}
+          title={basket.title}
+          price={basket.price}
+          img={basket.img}
+        />
+      ))}
+
+      <button onClick={addToBasket}>Add to Basket</button>
     </div>
   );
 }
