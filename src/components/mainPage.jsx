@@ -37,12 +37,16 @@ export default function ShowGames() {
     );
   };
 
-  const addToBasket = () => {
-    let newItem = new Basket("Test", 20, "img"); // Change these values as needed
-
+  const addToBasket = (title, price, img) => {
+    let newItem = new Basket(title, price, img);
     setBasketData((prevBasketData) => [...prevBasketData, newItem]);
   };
 
+  const ShowAddToBasket = ({ title, price, img }) => (
+    <div>
+      <button onClick={() => addToBasket(title, price, img)}>Add to Basket</button>
+    </div>
+  );
 
   const showGameDetails = (title) => {
     setSelectedGame(title);
@@ -55,8 +59,9 @@ export default function ShowGames() {
   const ActionGamesList = ({ games }) => (
     <div className="img-container">
       {games.map((game, index) => (
-        <div onClick={() => showGameDetails(game)} key={index}>
-          <img className="img-size" src={game.img} alt="none" />
+        <div key={index}>
+          <img className="img-size" src={game.img} alt="none" onClick={() => showGameDetails(game)} />
+          <ShowAddToBasket title={game.title} price={game.price} img={game.img} />
         </div>
       ))}
     </div>
@@ -65,9 +70,10 @@ export default function ShowGames() {
   const ShooterGamesList = ({ games }) => (
     <div className="img-container">
       {games.map((game, index) => (
-        <div onClick={() => showGameDetails(game)} key={index}>
+        <div key={index}>
           <h3>{game.title}</h3>
-          <img className="img-size" src={game.img} alt="none" />
+          <img className="img-size" src={game.img} alt="none" onClick={() => showGameDetails(game)} />
+          <ShowAddToBasket title={game.title} price={game.price} img={game.img} />
         </div>
       ))}
     </div>
@@ -76,9 +82,10 @@ export default function ShowGames() {
   const AdventureGamesList = ({ games }) => (
     <div className="img-container">
       {games.map((game, index) => (
-        <div onClick={() => showGameDetails(game)} key={index}>
-          <img className="img-size" src={game.img} alt="none" />
+        <div key={index}>
+          <img className="img-size" src={game.img} alt="none" onClick={() => showGameDetails(game)} />
           <h3 className="game-title">{game.title}</h3>
+          <ShowAddToBasket title={game.title} price={game.price} img={game.img} />
         </div>
       ))}
     </div>
@@ -87,9 +94,10 @@ export default function ShowGames() {
   const RpgGamesList = ({ games }) => (
     <div className="img-container">
       {games.map((game, index) => (
-        <div onClick={() => showGameDetails(game)} key={index}>
-          <img className="img-size" src={game.img} alt="none" />
+        <div key={index}>
+          <img className="img-size" src={game.img} alt="none" onClick={() => showGameDetails(game)} />
           <h3 className="game-title">{game.title}</h3>
+          <ShowAddToBasket title={game.title} price={game.price} img={game.img} />
         </div>
       ))}
     </div>
@@ -130,8 +138,6 @@ export default function ShowGames() {
           img={basket.img}
         />
       ))}
-
-      <button onClick={addToBasket}>Add to Basket</button>
     </div>
   );
 }
