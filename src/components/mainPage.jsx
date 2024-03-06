@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import "./mainPage.css";
-import Game, {
-  actionGames,
-  adventureGames,
-  shooterGames,
-  rpgGames,
-} from "../model/gamesData";
+import Game, { actionGames, adventureGames, shooterGames, rpgGames } from "../model/gamesData";
 
 export default function ShowGames() {
   const [selectedGame, setSelectedGame] = useState(null);
@@ -13,29 +8,19 @@ export default function ShowGames() {
 
   class Basket extends Game {
     constructor(title, price, img) {
-      super(
-        title,
-        "Default description",
-        price,
-        "Default platform",
-        "Default developer",
-        img
-      );
+      super(title, "Default description", price, "Default platform", "Default developer", img);
     }
   }
 
-  const ShowBasket = ({ title, price, img }) => {
-    const [basket, setBasket] = useState(new Basket(title, price, img));
-
-    return (
-      <div>
-        <h2>Basket Details</h2>
-        <p>Title: {basket.title}</p>
-        <p>Price: {basket.price}</p>
-        <img className="img-size" src={basket.img} alt="none" />
-      </div>
-    );
-  };
+  const ShowBasket = ({ title, price, img }) => (
+    <div>
+      <h2>Basket Details</h2>
+      <p>Title: {title}</p>
+      <p>Price: {price}</p>
+      <img className="img-size" src={img} alt="none" onClick={() => showGameDetails({ title, price, img })} />
+      {/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
+    </div>
+  );
 
   const addToBasket = (title, price, img) => {
     let newItem = new Basket(title, price, img);
@@ -48,60 +33,53 @@ export default function ShowGames() {
     </div>
   );
 
-  const showGameDetails = (title) => {
-    setSelectedGame(title);
+  const GameList = ({ games }) => (
+    <div className="img-container">
+      {games.map((game, index) => (
+        <div key={index}>
+          <img className="img-size" src={game.img} alt="none" onClick={() => showGameDetails(game)} />
+          <h3 className="game-title">{game.title}</h3>
+          <ShowAddToBasket title={game.title} price={game.price} img={game.img} />
+        </div>
+      ))}
+    </div>
+  );
+
+  const ActionGamesList = () => (
+    <>
+      <h2>Action Games</h2>
+      <GameList games={actionGames} />
+    </>
+  );
+
+  const ShooterGamesList = () => (
+    <>
+      <h2>Shooter Games</h2>
+      <GameList games={shooterGames} />
+    </>
+  );
+
+  const AdventureGamesList = () => (
+    <>
+      <h2>Adventure Games</h2>
+      <GameList games={adventureGames} />
+    </>
+  );
+
+  const RpgGamesList = () => (
+    <>
+      <h2>Role Playing Games</h2>
+      <GameList games={rpgGames} />
+    </>
+  );
+
+  const showGameDetails = (game) => {
+    setSelectedGame(game);
   };
 
   const resetSelectedGame = () => {
     setSelectedGame(null);
   };
-
-  const ActionGamesList = ({ games }) => (
-    <div className="img-container">
-      {games.map((game, index) => (
-        <div key={index}>
-          <img className="img-size" src={game.img} alt="none" onClick={() => showGameDetails(game)} />
-          <ShowAddToBasket title={game.title} price={game.price} img={game.img} />
-        </div>
-      ))}
-    </div>
-  );
-
-  const ShooterGamesList = ({ games }) => (
-    <div className="img-container">
-      {games.map((game, index) => (
-        <div key={index}>
-          <h3>{game.title}</h3>
-          <img className="img-size" src={game.img} alt="none" onClick={() => showGameDetails(game)} />
-          <ShowAddToBasket title={game.title} price={game.price} img={game.img} />
-        </div>
-      ))}
-    </div>
-  );
-
-  const AdventureGamesList = ({ games }) => (
-    <div className="img-container">
-      {games.map((game, index) => (
-        <div key={index}>
-          <img className="img-size" src={game.img} alt="none" onClick={() => showGameDetails(game)} />
-          <h3 className="game-title">{game.title}</h3>
-          <ShowAddToBasket title={game.title} price={game.price} img={game.img} />
-        </div>
-      ))}
-    </div>
-  );
-
-  const RpgGamesList = ({ games }) => (
-    <div className="img-container">
-      {games.map((game, index) => (
-        <div key={index}>
-          <img className="img-size" src={game.img} alt="none" onClick={() => showGameDetails(game)} />
-          <h3 className="game-title">{game.title}</h3>
-          <ShowAddToBasket title={game.title} price={game.price} img={game.img} />
-        </div>
-      ))}
-    </div>
-  );
 
   const GameDetails = ({ game }) => (
     <div>
@@ -119,24 +97,15 @@ export default function ShowGames() {
         <GameDetails game={selectedGame} />
       ) : (
         <>
-          <h2>Action Games</h2>
-          <ActionGamesList games={actionGames} />
-          <h2>Shooter Games</h2>
-          <ShooterGamesList games={shooterGames} />
-          <h2>Adventure Games</h2>
-          <AdventureGamesList games={adventureGames} />
-          <h2>Role Playing Games</h2>
-          <RpgGamesList games={rpgGames} />
+          <ActionGamesList />
+          <ShooterGamesList />
+          <AdventureGamesList />
+          <RpgGamesList />
         </>
       )}
 
       {basketData.map((basket, index) => (
-        <ShowBasket
-          key={index}
-          title={basket.title}
-          price={basket.price}
-          img={basket.img}
-        />
+        <ShowBasket key={index} title={basket.title} price={basket.price} img={basket.img} />
       ))}
     </div>
   );
