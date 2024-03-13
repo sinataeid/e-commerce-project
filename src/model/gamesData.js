@@ -13,7 +13,7 @@ const actionGames = [
     new Game(
         'Metal Gear Solid 5: The Phantom Pain',
         'A pinnacle of stealth action, set in a dynamic open world where espionage and infiltration are key. The game offers interconnected systems that constantly evolve.',
-        66.99,
+        100000000.99,
         ['PC', 'PS4', 'Xbox One'],
         'Kojima Productions',
         'metal-gear-5.jpeg'
