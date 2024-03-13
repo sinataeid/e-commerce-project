@@ -12,9 +12,9 @@ class Basket extends Game {
   constructor(title, price, img, quantity) {
     super(
       title,
-      DEFAULT_DESCRIPTION,
+      defaultDescription,
       price,
-      DEFAULT_PLATFORM,
+      defaultPlatform,
       "Default developer",
       img
     );
@@ -22,10 +22,10 @@ class Basket extends Game {
   }
 }
 
-const DEFAULT_DESCRIPTION = "Default description";
-const DEFAULT_PLATFORM = "Default platform";
+const defaultDescription = "Default description";
+const defaultPlatform = "Default platform";
 
-const CATEGORY_TITLES = {
+const categoryTitles = {
   action: "Action Games",
   shooter: "Shooter Games",
   adventure: "Adventure Games",
@@ -88,6 +88,7 @@ export const useBasket = () => {
   return context;
 };
 
+
 const BasketItem = ({ title, price, img, quantity, removeFromBasket }) => (
   <section className="basket-item">
     <h4>Title: {title}</h4>
@@ -142,7 +143,7 @@ const GameList = ({ games, showDetails, addToBasket }) => (
 
 const GamesCategoryList = ({ category, games, showDetails, addToBasket }) => (
   <div>
-    <h2>{CATEGORY_TITLES[category]}</h2>
+    <h2>{categoryTitles[category]}</h2>
     <GameList
       games={games}
       showDetails={showDetails}

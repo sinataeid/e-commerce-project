@@ -3,7 +3,7 @@ body {
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f8f8f8; /* Add a light background color */
+  background-color: #f2f2f2; /* Light background color */
 }
 
 /* Main container styling */
@@ -54,7 +54,7 @@ body {
 .game-title {
   margin-top: 10px;
   font-size: 18px;
-  color: #333; /* Dark text color */
+  color: #3e333f; /* Dark text color */
 }
 
 /* Button styling */
@@ -68,20 +68,20 @@ body {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 5px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
 }
 
 /* Add to basket, remove, and back buttons styling */
 .add-to-basket-button,
 .remove-button,
 .back-button {
-  background-color: #3498db; /* Blue button color */
+  background-color: #fc4442; /* Red button color */
   color: #fff; /* White text color */
 }
 
 /* Hover effect on buttons */
 .button:hover {
-  background-color: #2980b9; /* Darker blue on hover */
+  background-color: #e74c3c; /* Darker red on hover */
 }
 
 /* Basket item styling */
@@ -95,7 +95,7 @@ body {
 
 /* Basket summary container styling */
 .basket-summary {
-  background-color: #2ecc71; /* Green background color */
+  background-color: #f0e19e; /* Light yellow background color */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -103,10 +103,19 @@ body {
 
 /* Improved button styles */
 .add-to-basket-button:hover,
-.remove-button:hover,
 .back-button:hover {
-  background-color: #2c3e50; /* Dark gray on hover */
+  background-color: #3e333f; /* Dark purple on hover */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.remove-button {
+  background-color: #fc4442; /* Red button color */
+  color: #fff; /* White text color */
+  margin-top: 10px; /* Adjusted position */
+}
+
+.remove-button:hover {
+  background-color: #e74c3c; /* Darker red on hover */
 }
 
 .button:active {
