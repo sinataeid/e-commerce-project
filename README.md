@@ -30,7 +30,6 @@ This is a simple React application for a game store, allowing users to browse an
    ```bash
    npm start
 
-This will run the application in development mode. Open http://localhost:3000 to view it in the browser.
 
 
 You can copy and paste this code into your Markdown file and adjust any details as needed.
